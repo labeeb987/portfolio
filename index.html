@@ -1,0 +1,2369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Labeeb - Elite Full Stack Developer</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --accent: #06b6d4;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --dark: #0f172a;
+            --darker: #020617;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --purple: #7c3aed;
+            --pink: #ec4899;
+            --orange: #f97316;
+        }
+
+        [data-theme="light"] {
+            --dark: #ffffff;
+            --darker: #f8fafc;
+            --light: #1e293b;
+            --gray: #475569;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--darker);
+            color: var(--light);
+            overflow-x: hidden;
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        /* Cursor */
+        body {
+            cursor: none;
+        }
+
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: all 0.15s ease;
+        }
+
+        .custom-cursor.hover {
+            transform: scale(2);
+            background: var(--accent);
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--darker);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transition: opacity 1s ease;
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 3px solid transparent;
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .loading-text {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            color: var(--primary);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+            top: -50%;
+            left: -50%;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Interactive Floating Elements */
+        .floating-interactive {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .float-element {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            pointer-events: auto;
+            transition: all 0.3s ease;
+            animation: floatMove 8s ease-in-out infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .float-element:hover {
+            transform: scale(1.5) rotate(360deg);
+            box-shadow: 0 0 30px currentColor;
+        }
+
+        .float-element.clicked {
+            animation: explode 0.6s ease-out;
+        }
+
+        .float-element:nth-child(1) { 
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            top: 20%; left: 10%;
+            animation-delay: 0s;
+        }
+        .float-element:nth-child(2) { 
+            background: linear-gradient(45deg, var(--accent), var(--success));
+            top: 60%; right: 15%;
+            animation-delay: 2s;
+        }
+        .float-element:nth-child(3) { 
+            background: linear-gradient(45deg, var(--pink), var(--purple));
+            bottom: 30%; left: 20%;
+            animation-delay: 4s;
+        }
+        .float-element:nth-child(4) { 
+            background: linear-gradient(45deg, var(--warning), var(--orange));
+            top: 40%; left: 80%;
+            animation-delay: 6s;
+        }
+
+        @keyframes floatMove {
+            0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+            25% { transform: translateY(-20px) translateX(10px) rotate(90deg); }
+            50% { transform: translateY(0px) translateX(-10px) rotate(180deg); }
+            75% { transform: translateY(20px) translateX(5px) rotate(270deg); }
+        }
+
+        @keyframes explode {
+            0% { transform: scale(1); }
+            50% { transform: scale(2) rotate(180deg); opacity: 0.8; }
+            100% { transform: scale(3) rotate(360deg); opacity: 0; }
+        }
+
+        /* Particle System */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleFloat 6s infinite;
+        }
+
+        @keyframes particleFloat {
+            0% { opacity: 0; transform: translateY(100vh) scale(0); }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { opacity: 0; transform: translateY(-10px) scale(1); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .logo:hover {
+            transform: scale(1.1) rotate(5deg);
+            filter: drop-shadow(0 0 20px var(--primary));
+        }
+
+        .theme-toggle {
+            background: rgba(99, 102, 241, 0.2);
+            border: 1px solid var(--primary);
+            color: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .theme-toggle:hover {
+            background: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            animation: fadeInUp 1s ease-out;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2s ease-in-out infinite alternate;
+            position: relative;
+        }
+
+        .hero h1::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textShine 3s ease-in-out infinite;
+        }
+
+        @keyframes textShine {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 20px rgba(99, 102, 241, 0.3)); }
+            to { filter: drop-shadow(0 0 30px rgba(99, 102, 241, 0.6)); }
+        }
+
+        .typing-text {
+            height: 60px;
+            font-size: 1.25rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out 0.6s both;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--primary), var(--accent), var(--secondary), var(--pink));
+            border-radius: 50px;
+            z-index: -1;
+            animation: borderRotate 3s linear infinite;
+        }
+
+        @keyframes borderRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.4);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 3rem 2rem;
+            background: rgba(30, 41, 59, 0.3);
+            backdrop-filter: blur(10px);
+            margin: 0 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 15px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px);
+            background: rgba(99, 102, 241, 0.2);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: block;
+            animation: countUp 2s ease-out;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--gray);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+
+        .skill-item {
+            background: rgba(99, 102, 241, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .skill-item:hover::before {
+            left: 100%;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px) scale(1.05);
+            background: rgba(99, 102, 241, 0.2);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.2);
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--primary), var(--accent));
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            padding: 1rem;
+            margin: 2rem 0;
+            opacity: 0;
+            animation: slideInTimeline 0.6s ease-out forwards;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            padding-right: 2rem;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-left: 2rem;
+        }
+
+        .timeline-content {
+            background: rgba(30, 41, 59, 0.5);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 3px solid var(--darker);
+            transform: translateY(-50%);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -35px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -35px;
+        }
+
+        @keyframes slideInTimeline {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            animation: shimmer 2s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        .project-card:hover {
+            transform: translateY(-15px) rotateX(5deg);
+            box-shadow: 0 25px 50px rgba(99, 102, 241, 0.3);
+        }
+
+        .project-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .project-card:hover .project-image::before {
+            left: 100%;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--light);
+        }
+
+        .project-description {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tech-tag {
+            background: rgba(99, 102, 241, 0.2);
+            color: var(--accent);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .tech-tag:hover {
+            background: rgba(99, 102, 241, 0.4);
+            transform: scale(1.1);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .project-link::after {
+            content: '→';
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .project-link:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+
+        .project-link:hover::after {
+            transform: translateX(5px);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: rgba(30, 41, 59, 0.3);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            margin: 2rem 0;
+        }
+
+        .testimonials-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .testimonial-item {
+            text-align: center;
+            padding: 2rem;
+            display: none;
+            animation: fadeInTestimonial 0.5s ease-in;
+        }
+
+        .testimonial-item.active {
+            display: block;
+        }
+
+        .testimonial-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: var(--light);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        @keyframes fadeInTestimonial {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Blog Section */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .blog-card {
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            cursor: pointer;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+        }
+
+        .blog-image {
+            height: 150px;
+            background: linear-gradient(135deg, var(--accent), var(--success));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .blog-content {
+            padding: 1.5rem;
+        }
+
+        .blog-date {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--light);
+        }
+
+        /* Contact Section */
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--light);
+            text-decoration: none;
+            padding: 1rem 1.5rem;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .contact-link:hover::before {
+            left: 100%;
+        }
+
+        .contact-link:hover {
+            background: rgba(99, 102, 241, 0.2);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(15, 23, 42, 0.8);
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(99, 102, 241, 0.2);
+            color: var(--gray);
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.6s ease;
+        }
+
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.6s ease;
+        }
+
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Performance Metrics Widget */
+        .performance-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(30, 41, 59, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1rem;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            z-index: 1000;
+            min-width: 200px;
+            transition: all 0.3s ease;
+        }
+
+        .performance-widget:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.2);
+        }
+
+        .widget-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .widget-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .widget-stat {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+        }
+
+        .widget-value {
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 10000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            opacity: 1;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: var(--dark);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            transform: scale(0.7);
+            transition: transform 0.3s ease;
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            float: right;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+            transition: color 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: var(--danger);
+        }
+
+        /* Code Snippet */
+        .code-snippet {
+            background: rgba(15, 23, 42, 0.8);
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: var(--light);
+            border-left: 3px solid var(--primary);
+            overflow-x: auto;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                padding-left: 50px !important;
+                padding-right: 1rem !important;
+                text-align: left !important;
+            }
+
+            .timeline-item .timeline-content::before {
+                left: -35px !important;
+            }
+
+            .performance-widget {
+                bottom: 10px;
+                right: 10px;
+                min-width: 150px;
+            }
+
+            section {
+                padding: 3rem 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .float-element {
+                width: 30px;
+                height: 30px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loader"></div>
+        <div class="loading-text">Loading Amazing Portfolio...</div>
+    </div>
+
+    <!-- Background Animation -->
+    <div class="bg-animation"></div>
+
+    <!-- Particles System -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Interactive Floating Elements -->
+    <div class="floating-interactive">
+        <div class="float-element" data-emoji="🚀">🚀</div>
+        <div class="float-element" data-emoji="💻">💻</div>
+        <div class="float-element" data-emoji="⚡">⚡</div>
+        <div class="float-element" data-emoji="🎯">🎯</div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo" onclick="logoClick()">JS</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+        </div>
+    </nav>
+
+    <!-- Performance Widget -->
+    <div class="performance-widget">
+        <div class="widget-title">Live Stats</div>
+        <div class="widget-stats">
+            <div class="widget-stat">
+                <span>Certificates:</span>
+                <span class="widget-value" id="commits">47</span>
+            </div>
+            <div class="widget-stat">
+                <span>Projects:</span>
+                <span class="widget-value" id="projects">23</span>
+            </div>
+            <div class="widget-stat">
+                <span>Code Quality:</span>
+                <span class="widget-value" id="quality">98%</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Jason Deese</h1>
+            <div class="typing-text" id="typingText"></div>
+            <a href="#projects" class="cta-button">Explore My Universe</a>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <div class="stats-section fade-in">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span class="stat-number" data-target="50">0</span>
+                <div class="stat-label">Projects Completed</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="50">0</span>
+                <div class="stat-label">Happy Clients</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="5">0</span>
+                <div class="stat-label">Years Experience</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="99">0</span>
+                <div class="stat-label">Success Rate %</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="fade-in">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+            <div class="about-text slide-in-left">
+                <p>I'm a passionate full-stack developer with expertise in modern web technologies. I specialize in creating scalable applications that solve real-world problems with clean, efficient code.</p>
+                <p>With a strong foundation in both frontend and backend development, I bring ideas to life through innovative solutions and exceptional user experiences.</p>
+                <p>My passion lies in crafting digital experiences that not only look stunning but also perform flawlessly across all platforms.</p>
+            </div>
+            <div class="skills-grid slide-in-right">
+                <div class="skill-item">React</div>
+                <div class="skill-item">Flask</div>
+                <div class="skill-item">Python</div>
+                <div class="skill-item">SSE</div>
+                <div class="skill-item">PostgreSQL</div>
+                <div class="skill-item">JavaScript</div>
+                <div class="skill-item">Object-Oriented-Programming</div>
+                <div class="skill-item">AWS</div>
+                <div class="skill-item">Docker</div>
+                <div class="skill-item">GraphQL</div>
+                <div class="skill-item">Node.js</div>
+                <div class="skill-item">Next.js</div>
+                <div class="skill-item">Vue.js</div>
+                <div class="skill-item">Django</div>
+                <div class="skill-item">Kubernetes</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Timeline -->
+    <section id="experience" class="fade-in">
+        <h2 class="section-title">Experience Timeline</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Senior Full Stack Developer</h3>
+                    <h4>TechCorp Innovation</h4>
+                    <p><strong>2023 - Present</strong></p>
+                    <p>Leading development of scalable web applications using React, Node.js, and cloud technologies. Mentoring junior developers and implementing best practices.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Full Stack Developer</h3>
+                    <h4>Nexus</h4>
+                    <p><strong>2021 - 2023</strong></p>
+                    <p>Built and maintained multiple client applications, implemented CI/CD pipelines, and optimized database performance resulting in 40% faster load times.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Frontend Developer</h3>
+                    <h4>Freelance work</h4>
+                    <p><strong>2020 - 2021</strong></p>
+                    <p>Developed responsive web applications using modern JavaScript frameworks and collaborated with design teams to create pixel-perfect interfaces.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Junior Python Developer Internship</h3>
+                    <h4>CodeAcademy</h4>
+                    <p><strong>2019 - 2020</strong></p>
+                    <p>Started my professional journey building python applications, and scripting projects and learning the foundations of software development and APIs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <div class="testimonials fade-in">
+        <h2 class="section-title">What Clients Would Say</h2>
+        <div class="testimonials-slider">
+            <div class="testimonial-item active">
+                <p class="testimonial-text">"Jason delivered an exceptional restaurant management system that transformed our business operations. The attention to detail and performance optimization was outstanding."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">SM</div>
+                    <div>
+                        <div><strong>Sarah Morgan</strong></div>
+                        <div style="color: var(--gray);">Restaurant Owner</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-item">
+                <p class="testimonial-text">"The profit calculation tool Jason built saved us countless hours and improved our decision-making process. Highly recommended for complex business applications."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">DS</div>
+                    <div>
+                        <div><strong>David Smith</strong></div>
+                        <div style="color: var(--gray);">Business Analyst</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-item">
+                <p class="testimonial-text">"Professional, reliable, and incredibly skilled. Jason's automation scripts streamlined our content workflow and boosted productivity by 300%."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">SK</div>
+                    <div>
+                        <div><strong>Sarah Kim</strong></div>
+                        <div style="color: var(--gray);">Content Manager</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Projects Section -->
+    <section id="projects" class="fade-in">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card" onclick="openProjectModal('restaurant')">
+                <div class="project-image">🍽️</div>
+                <div class="project-content">
+                    <h3 class="project-title">RestaurantOS</h3>
+                    <p class="project-description">Complete restaurant management system with order tracking, taking orders, and customer analytics. Features real-time updates and mobile-responsive design.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Flask</span>
+                        <span class="tech-tag">SQLite</span>
+                        <span class="tech-tag">Server-Sent Events (SSE)</span>
+                        <span class="tech-tag">SQL Schema</span>
+                        <span class="tech-tag">HTML + Jinja2</span>    
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link" onclick="event.stopPropagation()">Live Demo</a>
+                        <a href="#" class="project-link" onclick="event.stopPropagation()">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="openProjectModal('profit')">
+                <div class="project-image">📊</div>
+                <div class="project-content">
+                    <h3 class="project-title">Profit Calculator Pro</h3>
+                    <p class="project-description">Advanced profit analysis tool with calculating expenses, in-depth profit/loss analysis, and AI capabilities. Helps businesses make data-driven decisions.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Flask</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">DOM manipulation</span>
+                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">JavaScript</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link" onclick="event.stopPropagation()">Live Demo</a>
+                        <a href="#" class="project-link" onclick="event.stopPropagation()">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="openProjectModal('autotube')">
+                <div class="project-image">📹</div>
+                <div class="project-content">
+                    <h3 class="project-title">AutoTube Uploader</h3>
+                    <p class="project-description">Automated Python script for bulk YouTube video uploads with metadata optimization, thumbnail generation, and scheduling features.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">YouTube Data API v3</span>
+                        <span class="tech-tag">OAuth 2.0</span>
+                        <span class="tech-tag">Pathlib</span>
+                        <span class="tech-tag">Exponential backoff</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link" onclick="event.stopPropagation()">Documentation</a>
+                        <a href="#" class="project-link" onclick="event.stopPropagation()">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="openProjectModal('swipebot')">
+                <div class="project-image">💕</div>
+                <div class="project-content">
+                    <h3 class="project-title">SwipeBot AI</h3>
+                    <p class="project-description">Smart automation tool with ML-powered photo analysis and preference learning. Features anti-detection algorithms and customizable parameters.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Selenium WebDriver</span>
+                        <span class="tech-tag">Remote Debugging of Chrome</span>
+                        <span class="tech-tag">Selenium</span>
+                        <span class="tech-tag">Automation</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link" onclick="event.stopPropagation()">Demo</a>
+                        <a href="#" class="project-link" onclick="event.stopPropagation()">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="openProjectModal('devtools')">
+                <div class="project-image">⚡</div>
+                <div class="project-content">
+                    <h3 class="project-title">DevTools Suite</h3>
+                    <p class="project-description">Collection of developer productivity tools including code generators, API testers, and . Streamlines development workflow.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Flask</span>
+                        <span class="tech-tag">Hash</span>
+                        <span class="tech-tag">Threading</span>
+                        <span class="tech-tag">JSON/Base64/Hashlib</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link" onclick="event.stopPropagation()">Download</a>
+                        <a href="#" class="project-link" onclick="event.stopPropagation()">GitHub</a>
+                    </div>
+                </div>
+            </div>
+<!--
+            <div class="project-card" onclick="openProjectModal('secureauth')">
+                <div class="project-image">🔐</div>
+                <div class="project-content">
+                    <h3 class="project-title">SecureAuth API</h3>
+                    <p class="project-description">Robust authentication microservice with JWT tokens, OAuth integration, and advanced security features. Scalable and production-ready.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">Express</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">Redis</span>
+                        <span class="tech-tag">Docker</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link" onclick="event.stopPropagation()">API Docs</a>
+                        <a href="#" class="project-link" onclick="event.stopPropagation()">GitHub</a>
+                    </div>
+                </div>
+            </div>-->
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="fade-in">
+        <h2 class="section-title">Latest Blog Posts</h2>
+        <div class="blog-grid">
+            <div class="blog-card" onclick="openBlogModal('ml')">
+                <div class="blog-image">🤖</div>
+                <div class="blog-content">
+                    <div class="blog-date">March 15, 2025</div>
+                    <h3 class="blog-title">Implementing Machine Learning with Python in Web Applications</h3>
+                    <p class="project-description">A guide to embedding machine learning models into Python web applications for real-time predictions.</p>
+                </div>
+            </div>
+            <div class="blog-card" onclick="openBlogModal('performance')">
+                <div class="blog-image">🚀</div>
+                <div class="blog-content">
+                    <div class="blog-date">March 8, 2025</div>
+                    <h3 class="blog-title">Advanced Performance Optimization Techniques</h3>
+                    <p class="project-description">Deep dive into modern web performance optimization strategies and tools for lightning-fast applications.</p>
+                </div>
+            </div>
+            <div class="blog-card" onclick="openBlogModal('microservices')">
+                <div class="blog-image">🏗️</div>
+                <div class="blog-content">
+                    <div class="blog-date">February 28, 2025</div>
+                    <h3 class="blog-title">Building Scalable Microservices with Docker</h3>
+                    <p class="project-description">Learn how to architect and deploy microservices using Docker, Kubernetes, and modern DevOps practices.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="fade-in">
+        <h2 class="section-title">Let's Create Something Amazing</h2>
+        <div class="contact-content">
+            <p>Ready to bring your next groundbreaking project to life? I'm always excited to work on innovative solutions and tackle challenging problems that push the boundaries of what's possible.</p>
+            <div class="contact-links">
+                <a href="mailto:b.ltd.987@gmail.com" class="contact-link">
+                    <span>📧</span>
+                    Email Me
+                </a>
+                <a href="https://linkedin.com/in/jasondeese" class="contact-link">
+                    <span>💼</span>
+                    LinkedIn
+                </a>
+                <a href="https://github.com/jasondeese" class="contact-link">
+                    <span>💻</span>
+                    GitHub
+                </a>
+                <!--<a href="https://twitter.com/alexdev" class="contact-link">
+                    <span>🐦</span>
+                    Twitter
+                </a>-->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Jason Deese. Crafted with passion, powered by innovation, and fueled by endless cups of coffee.</p>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script>
+        // Global Variables
+        let currentTestimonial = 0;
+        let particleCount = 0;
+        const maxParticles = 50;
+
+        // Loading Screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelector('.loading-screen').classList.add('hidden');
+            }, 2000);
+        });
+
+        // Custom Cursor
+        const cursor = document.querySelector('.custom-cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Cursor hover effects
+        document.querySelectorAll('a, button, .project-card, .float-element').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+
+        // Theme Toggle
+        function toggleTheme() {
+            const body = document.body;
+            const themeToggle = document.querySelector('.theme-toggle');
+            
+            if (body.getAttribute('data-theme') === 'light') {
+                body.removeAttribute('data-theme');
+                themeToggle.textContent = '🌙';
+            } else {
+                body.setAttribute('data-theme', 'light');
+                themeToggle.textContent = '☀️';
+            }
+        }
+
+        // Logo Click Animation
+        function logoClick() {
+            const logo = document.querySelector('.logo');
+            logo.style.animation = 'none';
+            setTimeout(() => {
+                logo.style.animation = 'spin 1s ease-in-out';
+            }, 10);
+        }
+
+        // Floating Elements Interaction
+        document.querySelectorAll('.float-element').forEach(element => {
+            element.addEventListener('click', (e) => {
+                // Explosion effect
+                element.classList.add('clicked');
+                
+                // Create particles
+                createExplosionParticles(e.pageX, e.pageY);
+                
+                // Change emoji randomly
+                const emojis = ['🎉', '✨', '💫', '🌟', '⭐', '🎯', '🚀', '💎', '🔥', '⚡'];
+                element.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                
+                // Reset after animation
+                setTimeout(() => {
+                    element.classList.remove('clicked');
+                    element.textContent = element.getAttribute('data-emoji');
+                }, 600);
+            });
+
+            element.addEventListener('mouseenter', () => {
+                element.style.animation = 'none';
+                element.style.transform = 'scale(1.3) rotate(180deg)';
+                element.style.filter = 'brightness(1.5)';
+            });
+
+            element.addEventListener('mouseleave', () => {
+                element.style.animation = 'floatMove 8s ease-in-out infinite';
+                element.style.transform = '';
+                element.style.filter = '';
+            });
+        });
+
+        // Particle System
+        function createParticle() {
+            if (particleCount >= maxParticles) return;
+            
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * window.innerWidth + 'px';
+            particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            particle.style.animationDelay = Math.random() * 2 + 's';
+            
+            document.getElementById('particles').appendChild(particle);
+            particleCount++;
+            
+            setTimeout(() => {
+                particle.remove();
+                particleCount--;
+            }, 6000);
+        }
+
+        // Create explosion particles
+        function createExplosionParticles(x, y) {
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                particle.style.position = 'fixed';
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                particle.style.width = '6px';
+                particle.style.height = '6px';
+                particle.style.background = `hsl(${Math.random() * 360}, 70%, 60%)`;
+                particle.style.borderRadius = '50%';
+                particle.style.pointerEvents = 'none';
+                particle.style.zIndex = '9999';
+                
+                const angle = (i / 15) * Math.PI * 2;
+                const velocity = Math.random() * 100 + 50;
+                const vx = Math.cos(angle) * velocity;
+                const vy = Math.sin(angle) * velocity;
+                
+                document.body.appendChild(particle);
+                
+                let posX = x;
+                let posY = y;
+                let opacity = 1;
+                
+                const animate = () => {
+                    posX += vx * 0.02;
+                    posY += vy * 0.02;
+                    opacity -= 0.02;
+                    
+                    particle.style.left = posX + 'px';
+                    particle.style.top = posY + 'px';
+                    particle.style.opacity = opacity;
+                    
+                    if (opacity > 0) {
+                        requestAnimationFrame(animate);
+                    } else {
+                        particle.remove();
+                    }
+                };
+                
+                animate();
+            }
+        }
+
+        // Generate particles periodically
+        setInterval(createParticle, 500);
+
+        // Typing Animation
+        const typingTexts = [
+            "Full-Stack Developer crafting digital experiences with cutting-edge technology",
+            "Building scalable applications that solve real-world problems",
+            "Transforming innovative ideas into powerful digital solutions",
+            "Creating the future, one line of code at a time"
+        ];
+        
+        let currentTextIndex = 0;
+        let currentCharIndex = 0;
+        let isDeleting = false;
+        
+        function typeText() {
+            const typingElement = document.getElementById('typingText');
+            const currentText = typingTexts[currentTextIndex];
+            
+            if (isDeleting) {
+                typingElement.textContent = currentText.substring(0, currentCharIndex - 1);
+                currentCharIndex--;
+            } else {
+                typingElement.textContent = currentText.substring(0, currentCharIndex + 1);
+                currentCharIndex++;
+            }
+            
+            let typeSpeed = isDeleting ? 30 : 60;
+            
+            if (!isDeleting && currentCharIndex === currentText.length) {
+                typeSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && currentCharIndex === 0) {
+                isDeleting = false;
+                currentTextIndex = (currentTextIndex + 1) % typingTexts.length;
+                typeSpeed = 500;
+            }
+            
+            setTimeout(typeText, typeSpeed);
+        }
+        
+        // Start typing animation after page load
+        setTimeout(typeText, 1000);
+
+        // Smooth scrolling animation observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Animate timeline items
+                    if (entry.target.classList.contains('timeline-item')) {
+                        const items = document.querySelectorAll('.timeline-item');
+                        items.forEach((item, index) => {
+                            setTimeout(() => {
+                                item.style.opacity = '1';
+                                item.style.transform = 'translateX(0)';
+                            }, index * 200);
+                        });
+                    }
+                    
+                    // Animate stats counters
+                    if (entry.target.classList.contains('stats-section')) {
+                        animateCounters();
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .timeline-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Counter Animation
+        function animateCounters() {
+            document.querySelectorAll('.stat-number').forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const increment = target / 100;
+                let current = 0;
+                
+                const updateCounter = () => {
+                    current += increment;
+                    if (current < target) {
+                        counter.textContent = Math.ceil(current);
+                        setTimeout(updateCounter, 20);
+                    } else {
+                        counter.textContent = target;
+                    }
+                };
+                
+                updateCounter();
+            });
+        }
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero-content');
+            if (hero && scrolled < window.innerHeight) {
+                hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+        });
+
+        // Project cards 3D hover effect
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(20px)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+            });
+        });
+
+        // Navbar background opacity on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            const scrolled = window.pageYOffset;
+            const opacity = Math.min(scrolled / 100, 0.95);
+            nav.style.background = `rgba(15, 23, 42, ${opacity})`;
+            nav.style.backdropFilter = `blur(${Math.min(scrolled / 10, 20)}px)`;
+        });
+
+        // Testimonials Slider
+        function nextTestimonial() {
+            const testimonials = document.querySelectorAll('.testimonial-item');
+            testimonials[currentTestimonial].classList.remove('active');
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            testimonials[currentTestimonial].classList.add('active');
+        }
+
+        // Auto-rotate testimonials
+        setInterval(nextTestimonial, 5000);
+
+        // Performance Widget Animation
+        function updatePerformanceStats() {
+            const commits = document.getElementById('commits');
+            const projects = document.getElementById('projects');
+            const quality = document.getElementById('quality');
+            
+            // Simulate live data updates
+            commits.textContent = Math.floor(Math.random() * 100) + 1200;
+            projects.textContent = Math.floor(Math.random() * 5) + 20;
+            quality.textContent = (Math.random() * 2 + 97).toFixed(1) + '%';
+        }
+
+        setInterval(updatePerformanceStats, 10000);
+
+        // Modal Functions
+        function openProjectModal(projectId) {
+            const modal = document.getElementById('modal');
+            const modalBody = document.getElementById('modal-body');
+            
+            const projectData = {
+                restaurant: {
+                    title: 'RestaurantOS - Complete Management System',
+                    content: `
+                        <h3>🍽️ RestaurantOS</h3>
+                        <p>A comprehensive restaurant management system built with modern technologies.</p>
+                        
+                        <h4>🚀 Key Features:</h4>
+                        <ul>
+                            <li>Real-time order tracking and management</li>
+                            <li>Inventory management with low-stock alerts</li>
+                            <li>Customer analytics and loyalty programs</li>
+                            <li>Staff scheduling and payroll integration</li>
+                            <li>Multi-location support with centralized dashboard</li>
+                        </ul>
+                        
+                        <h4>🛠️ Technical Implementation:</h4>
+                        <div class="code-snippet">
+// Real-time order updates using Socket.io
+io.on('connection', (socket) => {
+  socket.on('order-update', (orderData) => {
+    io.emit('kitchen-update', orderData);
+    updateDatabase(orderData);
+  });
+});
+                        </div>
+                        
+                        <h4>📊 Impact:</h4>
+                        <ul>
+                            <li>Reduced order processing time by 45%</li>
+                            <li>Improved customer satisfaction by 38%</li>
+                            <li>Decreased food waste by 22%</li>
+                        </ul>
+                    `
+                },
+                profit: {
+                    title: 'Profit Calculator Pro - Advanced Analytics',
+                    content: `
+                        <h3>📊 Profit Calculator Pro</h3>
+                        <p>Advanced profit analysis tool with ML-powered forecasting capabilities.</p>
+                        
+                        <h4>🚀 Key Features:</h4>
+                        <ul>
+                            <li>Dynamic chart visualizations with Chart.js</li>
+                            <li>Machine learning profit forecasting</li>
+                            <li>Multi-format export (PDF, Excel, CSV)</li>
+                            <li>Real-time data synchronization</li>
+                            <li>Custom KPI dashboard creation</li>
+                        </ul>
+                        
+                        <h4>🛠️ Technical Implementation:</h4>
+                        <div class="code-snippet">
+# ML-powered profit prediction
+from sklearn.linear_model import LinearRegression
+import pandas as pd
+
+def predict_profit(historical_data):
+    model = LinearRegression()
+    X = historical_data[['revenue', 'expenses', 'month']]
+    y = historical_data['profit']
+    model.fit(X, y)
+    return model.predict(future_data)
+                        </div>
+                        
+                        <h4>📈 Results:</h4>
+                        <ul>
+                            <li>95% prediction accuracy for quarterly forecasts</li>
+                            <li>Helped clients increase profit margins by 28%</li>
+                            <li>Reduced manual reporting time by 80%</li>
+                        </ul>
+                    `
+                },
+                autotube: {
+                    title: 'AutoTube Uploader - YouTube Automation',
+                    content: `
+                        <h3>📹 AutoTube Uploader</h3>
+                        <p>Intelligent YouTube automation script with AI-powered optimization.</p>
+                        
+                        <h4>🚀 Key Features:</h4>
+                        <ul>
+                            <li>Bulk video uploads with metadata optimization</li>
+                            <li>AI-generated thumbnails and titles</li>
+                            <li>Automated scheduling and publishing</li>
+                            <li>SEO optimization for maximum reach</li>
+                            <li>Analytics tracking and performance reports</li>
+                        </ul>
+                        
+                        <h4>🛠️ Technical Implementation:</h4>
+                        <div class="code-snippet">
+import cv2
+from PIL import Image, ImageDraw, ImageFont
+
+def generate_thumbnail(video_path, title):
+    cap = cv2.VideoCapture(video_path)
+    ret, frame = cap.read()
+    
+    # AI-powered scene selection
+    best_frame = analyze_frame_quality(frame)
+    
+    # Add dynamic title overlay
+    thumbnail = add_title_overlay(best_frame, title)
+    return thumbnail
+                        </div>
+                        
+                        <h4>📊 Performance:</h4>
+                        <ul>
+                            <li>Automated 1000+ video uploads</li>
+                            <li>Increased average view time by 52%</li>
+                            <li>Reduced upload time from 2 hours to 15 minutes</li>
+                        </ul>
+                    `
+                },
+                swipebot: {
+                    title: 'SwipeBot AI - Intelligent Automation',
+                    content: `
+                        <h3>💕 SwipeBot AI</h3>
+                        <p>Advanced automation tool with computer vision and machine learning.</p>
+                        
+                        <h4>🚀 Key Features:</h4>
+                        <ul>
+                            <li>ML-powered photo analysis and rating</li>
+                            <li>Behavioral pattern learning</li>
+                            <li>Anti-detection algorithms</li>
+                            <li>Preference customization engine</li>
+                            <li>Real-time analytics dashboard</li>
+                        </ul>
+                        
+                        <h4>🛠️ Technical Implementation:</h4>
+                        <div class="code-snippet">
+import tensorflow as tf
+import cv2
+import numpy as np
+
+class PhotoAnalyzer:
+    def __init__(self):
+        self.model = tf.keras.models.load_model('photo_rating_model.h5')
+    
+    def analyze_attractiveness(self, image):
+        processed = self.preprocess_image(image)
+        score = self.model.predict(processed)
+        return score[0][0]
+                        </div>
+                        
+                        <h4>🎯 Results:</h4>
+                        <ul>
+                            <li>94% accuracy in preference prediction</li>
+                            <li>300% increase in match rate</li>
+                            <li>Zero detection incidents in 6 months</li>
+                        </ul>
+                    `
+                },
+                devtools: {
+                    title: 'DevTools Suite - Developer Productivity',
+                    content: `
+                        <h3>⚡ DevTools Suite</h3>
+                        <p>Comprehensive developer toolkit built with Electron and React.</p>
+                        
+                        <h4>🚀 Key Features:</h4>
+                        <ul>
+                            <li>Code generators for multiple frameworks</li>
+                            <li>API testing and documentation tools</li>
+                            <li>Automated deployment scripts</li>
+                            <li>Database query builder and optimizer</li>
+                            <li>Performance monitoring dashboard</li>
+                        </ul>
+                        
+                        <h4>🛠️ Technical Implementation:</h4>
+                        <div class="code-snippet">
+// React component generator
+const generateComponent = (name, type) => {
+  const template = type === 'functional' 
+    ? functionalTemplate 
+    : classTemplate;
+    
+  return template.replace(/{{name}}/g, name)
+    .replace(/{{hooks}}/g, generateHooks());
+};
+                        </div>
+                        
+                        <h4>💼 Impact:</h4>
+                        <ul>
+                            <li>Reduced development time by 60%</li>
+                            <li>Used by 500+ developers worldwide</li>
+                            <li>Generated 10,000+ code templates</li>
+                        </ul>
+                    `
+                },
+                secureauth: {
+                    title: 'SecureAuth API - Enterprise Security',
+                    content: `
+                        <h3>🔐 SecureAuth API</h3>
+                        <p>Enterprise-grade authentication microservice with advanced security features.</p>
+                        
+                        <h4>🚀 Key Features:</h4>
+                        <ul>
+                            <li>JWT token management with refresh rotation</li>
+                            <li>OAuth 2.0 and OpenID Connect support</li>
+                            <li>Multi-factor authentication (MFA)</li>
+                            <li>Rate limiting and DDoS protection</li>
+                            <li>Audit logging and compliance reporting</li>
+                        </ul>
+                        
+                        <h4>🛠️ Technical Implementation:</h4>
+                        <div class="code-snippet">
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+
+class AuthService {
+  async authenticate(email, password) {
+    const user = await User.findByEmail(email);
+    const isValid = await bcrypt.compare(password, user.hash);
+    
+    if (isValid) {
+      return this.generateTokens(user);
+    }
+    throw new Error('Invalid credentials');
+  }
+}
+                        </div>
+                        
+                        <h4>🛡️ Security Metrics:</h4>
+                        <ul>
+                            <li>99.9% uptime with zero security breaches</li>
+                            <li>Handles 1M+ requests per day</li>
+                            <li>SOC 2 Type II compliant</li>
+                        </ul>
+                    `
+                }
+            };
+            
+            modalBody.innerHTML = projectData[projectId].content;
+            modal.classList.add('active');
+        }
+
+        function openBlogModal(blogId) {
+            const modal = document.getElementById('modal');
+            const modalBody = document.getElementById('modal-body');
+            
+            const blogData = {
+                ml: {
+                    title: 'Machine Learning with Python in Web Applications',
+                    content: `
+                        <h3>🐍 Implementing Machine Learning with Python in Web Applications</h3>
+                        <p><em>March 20, 2025</em></p>
+                        
+                        <p>Python, with its rich ecosystem of machine learning libraries like scikit-learn, TensorFlow, and PyTorch, can power intelligent web applications. By integrating Python ML models with web frameworks such as Flask or Django, developers can deliver smart features like predictions, recommendations, and analytics directly to users.</p>
+                        
+                        <h4>🚀 Getting Started with Flask and a ML Model</h4>
+                        <div class="code-snippet">
+                    from flask import Flask, request, jsonify
+                    import joblib
+                    import numpy as np
+
+                    app = Flask(__name__)
+
+                    # Load the pre-trained ML model
+                    model = joblib.load('model.pkl')
+
+                    @app.route('/predict', methods=['POST'])
+                    def predict():
+                        data = request.get_json()
+                        prediction = model.predict(np.array(data['input']).reshape(1, -1))
+                        return jsonify({'prediction': prediction.tolist()})
+
+                    if __name__ == '__main__':
+                        app.run(debug=True)
+                        </div>
+                        
+                        <h4>💡 Real-World Applications</h4>
+                        <ul>
+                            <li>Personalized content recommendations</li>
+                            <li>Real-time fraud detection in e-commerce</li>
+                            <li>Predictive analytics for user behavior</li>
+                            <li>Dynamic pricing strategies based on demand</li>
+                        </ul>
+                        
+                        <p>Integrating Python-based machine learning into web applications enables developers to build smarter, adaptive user experiences. Start experimenting with ML today and bring intelligence to your web apps!</p>
+                    `
+                    },
+
+                performance: {
+                    title: 'Advanced Performance Optimization with Python',
+                    content: `
+                        <h3>🐍 Advanced Performance Optimization in Python Web Apps</h3>
+                        <p><em>March 20, 2025</em></p>
+                        
+                        <p>Optimizing your Python web applications improves speed, scalability, and user experience. Focus on efficient code and smart caching.</p>
+                        
+                        <h4>⚡ Example: Caching with Flask</h4>
+                        <div class="code-snippet">
+                    from flask import Flask, jsonify
+                    from flask_caching import Cache
+
+                    app = Flask(__name__)
+                    cache = Cache(app, config={'CACHE_TYPE': 'simple'})
+
+                    @app.route('/data')
+                    @cache.cached(timeout=60)
+                    def get_data():
+                        # Expensive computation or database query
+                        return jsonify({'result': 'fast response'})
+                        </div>
+                        
+                        <h4>🎯 Key Tips</h4>
+                        <ul>
+                            <li>Use caching for repeated queries</li>
+                            <li>Optimize database queries and indexes</li>
+                            <li>Profile and optimize slow Python functions</li>
+                            <li>Serve static files via CDN</li>
+                        </ul>
+                        
+                        <p>Small optimizations in Python can drastically boost performance. Make speed a priority!</p>
+                    `
+                    },
+
+                microservices: {
+                    title: 'Building Scalable Microservices with Docker',
+                    content: `
+                        <h3>🐳 Building Scalable Microservices with Docker</h3>
+                        <p><em>March 20, 2025</em></p>
+                        
+                        <p>Docker makes it easy to containerize microservices, allowing independent scaling and deployment.</p>
+                        
+                        <h4>⚡ Docker Example</h4>
+                        <div class="code-snippet">
+                    # Simple Dockerfile for a Python microservice
+                    FROM python:3.11-slim
+                    WORKDIR /app
+                    COPY requirements.txt .
+                    RUN pip install -r requirements.txt
+                    COPY . .
+                    EXPOSE 5000
+                    CMD ["python", "app.py"]
+                        </div>
+                        
+                        <h4>🌐 Key Patterns</h4>
+                        <ul>
+                            <li>API Gateway for routing</li>
+                            <li>Message queues for async communication</li>
+                            <li>Circuit breakers for reliability</li>
+                        </ul>
+                        
+                        <p>Dockerized microservices let teams deploy faster and scale smarter.</p>
+                    `
+                    }
+
+            };
+            
+            modalBody.innerHTML = blogData[blogId].content;
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('modal').addEventListener('click', (e) => {
+            if (e.target.id === 'modal') {
+                closeModal();
+            }
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Initialize skill items animation
+        document.querySelectorAll('.skill-item').forEach((item, index) => {
+            item.style.animationDelay = `${index * 0.1}s`;
+        });
+
+        // Easter eggs and fun interactions
+        let konamiCode = [];
+        const konamiSequence = [
+            'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
+            'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
+            'KeyB', 'KeyA'
+        ];
+
+        document.addEventListener('keydown', (e) => {
+            konamiCode.push(e.code);
+            if (konamiCode.length > konamiSequence.length) {
+                konamiCode.shift();
+            }
+            
+            if (JSON.stringify(konamiCode) === JSON.stringify(konamiSequence)) {
+                // Easter egg activated!
+                document.body.style.animation = 'rainbow 2s infinite';
+                setTimeout(() => {
+                    document.body.style.animation = '';
+                }, 10000);
+                
+                // Show special message
+                const message = document.createElement('div');
+                message.textContent = '🎉 You found the secret! You are a true developer! 🎉';
+                message.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+                    color: white;
+                    padding: 2rem;
+                    border-radius: 20px;
+                    font-size: 1.2rem;
+                    font-weight: bold;
+                    z-index: 10000;
+                    animation: bounce 1s infinite;
+                `;
+                document.body.appendChild(message);
+                
+                setTimeout(() => {
+                    message.remove();
+                }, 5000);
+            }
+        });
+
+        // Add rainbow animation for easter egg
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes rainbow {
+                0% { filter: hue-rotate(0deg); }
+                100% { filter: hue-rotate(360deg); }
+            }
+            @keyframes bounce {
+                0%, 20%, 50%, 80%, 100% { transform: translate(-50%, -50%) translateY(0); }
+                40% { transform: translate(-50%, -50%) translateY(-10px); }
+                60% { transform: translate(-50%, -50%) translateY(-5px); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Final touch: Add some sparkle to random elements
+        setInterval(() => {
+            const elements = document.querySelectorAll('.project-card, .skill-item, .contact-link');
+            const randomElement = elements[Math.floor(Math.random() * elements.length)];
+            
+            if (randomElement) {
+                randomElement.style.filter = 'brightness(1.2) drop-shadow(0 0 10px rgba(99, 102, 241, 0.5))';
+                setTimeout(() => {
+                    randomElement.style.filter = '';
+                }, 1000);
+            }
+        }, 15000);
+
+        console.log(`
+🎉 Welcome to Alex Rodriguez's Portfolio! 🎉
+
+   _____ __                ___       ____            __     _                
+  / ___// /_  ____ _   __ / | |     / / /_  ____  __/ /_   (_)___  ____ _   
+  \__ \/ __ \/ __ \` | / /_/ /| | /| / / __ \/ __ \/ / __ \ / / __ \/ __ \`/ 
+ ___/ / / / / /_/ / |/ / _  _/ |/ |/ / /_/ / /_/ / / / / // / / / / /_/ /   
+/____/_/ /_/\____/|___/ (_)(_)__/|__/_.___/\____/_/_/ /_//_/_/ /_/\__, /    
+                                                                /____/     
+
+💻 Built with passion and cutting-edge technology
+🚀 Powered by creativity and endless coffee
+⚡ Optimized for performance and user experience
+🎯 Designed to inspire and showcase innovation
+
+Try the Konami Code for a surprise! ↑↑↓↓←→←→BA
+        `);
+    </script>
+</body>
+</html>
