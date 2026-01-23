@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Labeeb | LinkedIn</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f3f2ef;
+            color: #000000e6;
+        }
+
+        .top-nav {
+            background: white;
+            border-bottom: 1px solid #0000001f;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 0 0 1px rgba(0,0,0,0.08);
+        }
+
+        .nav-container {
+            max-width: 1128px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            height: 52px;
+        }
+
+        .nav-logo {
+            color: #0a66c2;
+            font-size: 34px;
+            font-weight: bold;
+            margin-right: 24px;
+            cursor: pointer;
+        }
+
+        .nav-items {
+            display: flex;
+            gap: 32px;
+            flex: 1;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            font-size: 12px;
+            color: #666;
+            transition: color 0.2s;
+            text-decoration: none;
+        }
+
+        .nav-item:hover {
+            color: #000;
+        }
+
+        .nav-item-icon {
+            font-size: 20px;
+            margin-bottom: 2px;
+        }
+
+        .main-container {
+            max-width: 1128px;
+            margin: 24px auto;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 24px;
+            padding: 0 24px;
+        }
+
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .sidebar-card {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #0000001f;
+            padding: 16px;
+            margin-bottom: 8px;
+        }
+
+        .sidebar-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .sidebar-item {
+            padding: 8px 0;
+            font-size: 14px;
+            color: #00000099;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .sidebar-item:hover {
+            color: #0a66c2;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #0000001f;
+            overflow: hidden;
+        }
+
+        .profile-header {
+            position: relative;
+        }
+
+        .banner-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            object-fit: cover;
+        }
+
+        .profile-info {
+            padding: 24px 24px 16px;
+            position: relative;
+        }
+
+        .profile-pic-container {
+            position: absolute;
+            top: -70px;
+            left: 24px;
+        }
+
+        .profile-pic {
+            width: 152px;
+            height: 152px;
+            border-radius: 50%;
+            border: 4px solid white;
+            background: #ddd;
+            object-fit: cover;
+            object-position: center 20%;
+        }
+
+        .profile-details {
+            margin-top: 82px;
+        }
+
+        .profile-name {
+            font-size: 24px;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        .profile-headline {
+            font-size: 16px;
+            color: #000000e6;
+            margin-top: 4px;
+            line-height: 1.5;
+        }
+
+        .profile-location {
+            font-size: 14px;
+            color: #00000099;
+            margin-top: 8px;
+        }
+
+        .profile-contact {
+            font-size: 14px;
+            color: #0a66c2;
+            margin-top: 4px;
+        }
+
+        .profile-stats {
+            font-size: 14px;
+            color: #0a66c2;
+            margin-top: 12px;
+            font-weight: 600;
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #0000001f;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 24px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: #0a66c2;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #004182;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #0a66c2;
+            border: 1px solid #0a66c2;
+        }
+
+        .btn-secondary:hover {
+            background: #eef3f8;
+            border: 2px solid #0a66c2;
+        }
+
+        .btn-outline {
+            background: white;
+            color: #00000099;
+            border: 1px solid #00000099;
+        }
+
+        .btn-outline:hover {
+            background: #f3f2ef;
+        }
+
+        .section {
+            padding: 24px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .section-content {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #000000e6;
+        }
+
+        .experience-item {
+            display: flex;
+            gap: 12px;
+            padding: 24px;
+            border-bottom: 1px solid #0000001f;
+        }
+
+        .experience-item:last-child {
+            border-bottom: none;
+        }
+
+        .company-logo {
+            width: 48px;
+            height: 48px;
+            background: #ddd;
+            border-radius: 4px;
+            flex-shrink: 0;
+            object-fit: cover;
+        }
+
+        .experience-details {
+            flex: 1;
+        }
+
+        .experience-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #000000e6;
+        }
+
+        .experience-company {
+            font-size: 14px;
+            color: #00000099;
+            margin-top: 2px;
+        }
+
+        .experience-duration {
+            font-size: 14px;
+            color: #00000099;
+            margin-top: 4px;
+        }
+
+        .experience-description {
+            font-size: 14px;
+            color: #000000e6;
+            margin-top: 8px;
+            line-height: 1.5;
+        }
+
+        .skill-item {
+            padding: 16px 24px;
+            border-bottom: 1px solid #0000001f;
+        }
+
+        .skill-item:last-child {
+            border-bottom: none;
+        }
+
+        .skill-name {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .skill-description {
+            font-size: 14px;
+            color: #00000099;
+            margin-top: 4px;
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 16px;
+            padding: 24px;
+        }
+
+        .cert-item {
+            border: 1px solid #0000001f;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .cert-item:hover {
+            box-shadow: 0 0 0 2px #0a66c2;
+        }
+
+        .cert-image {
+            width: 100%;
+            height: 150px;
+            background: #f3f2ef;
+            object-fit: cover;
+        }
+
+        .cert-info {
+            padding: 12px;
+        }
+
+        .cert-name {
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 4px;
+        }
+
+        .cert-company {
+            font-size: 12px;
+            color: #00000099;
+            margin-bottom: 8px;
+        }
+
+        .cert-link {
+            display: inline-block;
+            font-size: 12px;
+            color: #0a66c2;
+            text-decoration: none;
+            padding: 4px 8px;
+            border: 1px solid #0a66c2;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .cert-link:hover {
+            background: #0a66c2;
+            color: white;
+        }
+
+        .post-item {
+            padding: 24px;
+            border-bottom: 1px solid #0000001f;
+        }
+
+        .post-item:last-child {
+            border-bottom: none;
+        }
+
+        .post-header {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .post-author-pic {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #ddd;
+            object-fit: cover;
+            object-position: center 20%;
+        }
+
+        .post-author-info {
+            flex: 1;
+        }
+
+        .post-author-name {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .post-time {
+            font-size: 12px;
+            color: #00000099;
+        }
+
+        .post-content {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .post-actions {
+            display: flex;
+            gap: 24px;
+            padding-top: 8px;
+            border-top: 1px solid #0000001f;
+        }
+
+        .post-action {
+            font-size: 14px;
+            color: #00000099;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .post-action:hover {
+            background: #f3f2ef;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 8px;
+            padding: 24px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .cert-modal-content {
+            background: white;
+            padding: 20px;
+            max-width: 95vw;
+            max-height: 95vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .cert-modal-image {
+            max-width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+
+        .modal-header {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-btn {
+            font-size: 32px;
+            cursor: pointer;
+            color: #666;
+            background: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: -50px;
+            right: 0;
+            transition: all 0.2s;
+            border: 2px solid #ddd;
+        }
+
+        .close-btn:hover {
+            background: #f3f2ef;
+            color: #000;
+        }
+
+        .contact-info {
+            margin-top: 16px;
+        }
+
+        .contact-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #0000001f;
+        }
+
+        .contact-item:last-child {
+            border-bottom: none;
+        }
+
+        .contact-label {
+            font-size: 12px;
+            color: #00000099;
+            margin-bottom: 4px;
+        }
+
+        .contact-value {
+            font-size: 14px;
+            color: #000000e6;
+        }
+
+        .contact-value a {
+            color: #0a66c2;
+            text-decoration: none;
+        }
+
+        .contact-value a:hover {
+            text-decoration: underline;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #000000e6;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #00000099;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: #0a66c2;
+            border-width: 2px;
+            padding: 9px 11px;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 12px;
+            background: #0a66c2;
+            color: white;
+            border: none;
+            border-radius: 24px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .form-submit:hover {
+            background: #004182;
+        }
+
+        .form-submit:disabled {
+            background: #00000033;
+            cursor: not-allowed;
+        }
+
+        .success-message {
+            background: #d1f4e0;
+            color: #0d7d3e;
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 16px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+
+            .right-column {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="nav-logo">in</div>
+            <div class="nav-items">
+                <div class="nav-item" onclick="scrollToTop()">
+                    <div class="nav-item-icon">🏠</div>
+                    <div>Home</div>
+                </div>
+                <div class="nav-item" onclick="openNetworkModal()">
+                    <div class="nav-item-icon">👥</div>
+                    <div>My Network</div>
+                </div>
+                <div class="nav-item" onclick="openJobsModal()">
+                    <div class="nav-item-icon">💼</div>
+                    <div>Jobs</div>
+                </div>
+                <div class="nav-item" onclick="openMessageModal()">
+                    <div class="nav-item-icon">💬</div>
+                    <div>Messaging</div>
+                </div>
+                <a href="https://labeeb987.github.io/portfolio" target="_blank" class="nav-item">
+                    <div class="nav-item-icon">🌐</div>
+                    <div>Website</div>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="left-column">
+            <div class="card profile-header">
+                <img src="LinkedIn Banner.png" alt="Banner" class="banner-image">
+                <div class="profile-info">
+                    <div class="profile-pic-container">
+                        <img src="profile-pic.jpg" alt="Muhammad Labeeb" class="profile-pic">
+                    </div>
+                    <div class="profile-details">
+                        <h1 class="profile-name">Muhammad Labeeb</h1>
+                        <p class="profile-headline">Remote Sales Professional | Account Executive | Lead Generation & Closing Specialist | Social Media Manager | Python Programming | Technical Sales | IT | Web Development</p>
+                        <p class="profile-location">Qatar | Ar Rayyān, Baladīyat ar Rayyān</p>
+                        <p class="profile-contact">+974 7764-2002 | b.ltd.987@gmail.com</p>
+                        <p class="profile-stats">500+ connections</p>
+                        <div class="profile-actions">
+                            <button class="btn btn-primary" onclick="openMessageModal()">Message</button>
+                            <button class="btn btn-secondary" onclick="openContactModal()">Connect</button>
+                            <a href="https://labeeb987.github.io/portfolio" target="_blank" class="btn btn-outline" style="text-decoration: none; display: inline-block;">Visit Website</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="section">
+                    <h2 class="section-title">About</h2>
+                    <div class="section-content">
+                        <p>Sales professional with 2+ years of call center and remote sales experience. Proven success in outbound/inbound sales, lead generation, and closing across Medicare, Obamacare, Final Expense, Home Improvement, Real Estate, and E-commerce. Skilled at building rapport, handling objections, and nurturing client relationships. Effective communicator with a technical aptitude for CRMs and sales tools in fast-paced, high-volume environments.</p>
+                        <br>
+                        <p>I'm also a passionate full-stack developer with expertise in modern web technologies. I specialize in creating scalable applications that solve real-world problems with clean, efficient code. With a strong foundation in both frontend and backend development, I bring ideas to life through innovative solutions and exceptional user experiences.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="section">
+                    <h2 class="section-title">Activity</h2>
+                </div>
+                <div class="post-item">
+                    <div class="post-header">
+                        <img src="profile-pic.jpg" alt="Muhammad Labeeb" class="post-author-pic">
+                        <div class="post-author-info">
+                            <div class="post-author-name">Muhammad Labeeb</div>
+                            <div class="post-time">2 days ago</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        Excited to share that I've just completed a challenging sales automation project that increased lead conversion by 35%! The key was understanding the customer journey and implementing targeted follow-ups at the right time. Sales isn't just about numbers—it's about building genuine relationships. What's your go-to strategy for closing deals? #Sales #LeadGeneration #B2B
+                    </div>
+                    <div class="post-actions">
+                        <span class="post-action">👍 Like</span>
+                        <span class="post-action">💬 Comment</span>
+                        <span class="post-action">🔄 Repost</span>
+                        <span class="post-action">📤 Send</span>
+                    </div>
+                </div>
+                <div class="post-item">
+                    <div class="post-header">
+                        <img src="profile-pic.jpg" alt="Muhammad Labeeb" class="post-author-pic">
+                        <div class="post-author-info">
+                            <div class="post-author-name">Muhammad Labeeb</div>
+                            <div class="post-time">1 week ago</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        Why Inbound Sales Strategy is a Game-Changer: After years in sales, I've learned that the best clients are the ones who come to you. An effective inbound strategy isn't about waiting—it's about creating value that attracts the right prospects. By publishing educational content, optimizing SEO, and nurturing leads through the buyer's journey, you build trust before the first conversation even happens. The result? Higher quality leads, shorter sales cycles, and better close rates. Outbound has its place, but inbound is where sustainable growth happens. #InboundSales #ContentMarketing #SalesStrategy
+                    </div>
+                    <div class="post-actions">
+                        <span class="post-action">👍 Like</span>
+                        <span class="post-action">💬 Comment</span>
+                        <span class="post-action">🔄 Repost</span>
+                        <span class="post-action">📤 Send</span>
+                    </div>
+                </div>
+                <div class="post-item">
+                    <div class="post-header">
+                        <img src="profile-pic.jpg" alt="Muhammad Labeeb" class="post-author-pic">
+                        <div class="post-author-info">
+                            <div class="post-author-name">Muhammad Labeeb</div>
+                            <div class="post-time">2 weeks ago</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        Tech + Sales = Unstoppable. Using Python to automate repetitive tasks has freed up 10+ hours per week for actual selling. From lead scoring algorithms to automated follow-up sequences, the possibilities are endless. If you're in sales and not leveraging automation, you're leaving money on the table. #SalesTech #Automation #Python
+                    </div>
+                    <div class="post-actions">
+                        <span class="post-action">👍 Like</span>
+                        <span class="post-action">💬 Comment</span>
+                        <span class="post-action">🔄 Repost</span>
+                        <span class="post-action">📤 Send</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="section">
+                    <h2 class="section-title">Experience</h2>
+                </div>
+                <div class="experience-item">
+                    <img src="nexus-logo.png" alt="Nexus" class="company-logo">
+                    <div class="experience-details">
+                        <div class="experience-title">Account Executive</div>
+                        <div class="experience-company">Nexus</div>
+                        <div class="experience-duration">Sep 2024 - Jul 2025 · 11 mos</div>
+                        <div class="experience-description">Managing and nurturing real estate client relations and selling them virtual assistant services, customer service, social media management, transaction coordination, admin tasks, and digital marketing, while delegating technical tasks.</div>
+                    </div>
+                </div>
+                <div class="experience-item">
+                    <img src="mars-po.png" alt="Mars BPO 2.0" class="company-logo">
+                    <div class="experience-details">
+                        <div class="experience-title">Senior Sales Verifier</div>
+                        <div class="experience-company">Mars BPO 2.0</div>
+                        <div class="experience-duration">Jul 2024 - Sep 2024 · 3 mos</div>
+                        <div class="experience-description">Closing sales, creating and maintaining clients, and verifying sales, while supervising and training new agents.</div>
+                    </div>
+                </div>
+                <div class="experience-item">
+                    <img src="bini-telecom.jpg" alt="Bini Telecom" class="company-logo">
+                    <div class="experience-details">
+                        <div class="experience-title">Outbound Sales Expert</div>
+                        <div class="experience-company">Bini Telecom</div>
+                        <div class="experience-duration">Apr 2024 - May 2024 · 2 mos</div>
+                        <div class="experience-description">Verifying leads, and getting new clients, nurturing relations, and helping aged clients in the US, with their Final Expense Insurance.</div>
+                    </div>
+                </div>
+                <div class="experience-item">
+                    <img src="outright.png" alt="Outright Marketing" class="company-logo">
+                    <div class="experience-details">
+                        <div class="experience-title">Senior Sales Trainer and Specialist</div>
+                        <div class="experience-company">Outright Marketing</div>
+                        <div class="experience-duration">Nov 2023 - Mar 2024 · 5 mos</div>
+                        <div class="experience-description">Training new recruits, closing deals, generating leads, I did it all. Everything related to Sales.</div>
+                    </div>
+                </div>
+                <div class="experience-item">
+                    <img src="icm-group.jpg" alt="ICM Group" class="company-logo">
+                    <div class="experience-details">
+                        <div class="experience-title">Virtual Assistant, Lead Generation</div>
+                        <div class="experience-company">ICM Group - Remote</div>
+                        <div class="experience-duration">Feb 2023 - Jun 2023 · 5 mos</div>
+                        <div class="experience-description">Lead Generation through Organic Content creation, Social Media Management, and SEO.</div>
+                    </div>
+                </div>
+                <div class="experience-item">
+                    <img src="exteme-commerce.png" alt="Extreme Commerce" class="company-logo">
+                    <div class="experience-details">
+                        <div class="experience-title">Business Development Manager</div>
+                        <div class="experience-company">Extreme Commerce</div>
+                        <div class="experience-duration">Sep 2021 - Jan 2023 · 1 yr 5 mos</div>
+                        <div class="experience-description">Developing E-Commerce Businesses, and Scaling them from zero to 100, managing inventory, selling, shipping, buyers, and making relations with suppliers, manufacturers.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="section">
+                    <h2 class="section-title">Skills</h2>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Sales & Business Development</div>
+                    <div class="skill-description">Outbound & Inbound Calls, Cold Calling & Warm Calling, Lead Generation & Qualification (BANT), Objection Handling, Closing Techniques, Appointment Setting, Sales Verification & Compliance</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Account Management</div>
+                    <div class="skill-description">Client Relations Management, Driving Sales, High-Volume Dialing</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Virtual Assistant Services</div>
+                    <div class="skill-description">Administrative Support, Email Management, Calendar Scheduling, Data Entry, Customer Service, Task Coordination, Project Management</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Python Programming</div>
+                    <div class="skill-description">OOP, APIs, Modules, Backend Development, Web Development, AI, LLM Model Training</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Digital Marketing</div>
+                    <div class="skill-description">YouTube SEO, Content Creation, Social Media Management, Lead Generation through Social Media</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="section">
+                    <h2 class="section-title">Licenses & Certifications</h2>
+                </div>
+                <div class="cert-grid">
+                    <div class="cert-item" onclick="openCertModal('Content Marketing Hubspot.png', '#')">
+                        <img src="Content Marketing Hubspot.png" alt="Content Marketing" class="cert-image">
+                        <div class="cert-info">
+                            <div class="cert-name">Content Marketing</div>
+                            <div class="cert-company">HubSpot Academy</div>
+                        </div>
+                    </div>
+                    <div class="cert-item" onclick="openCertModal('sales management certificate hubspot.png', '#')">
+                        <img src="sales management certificate hubspot.png" alt="Sales Management" class="cert-image">
+                        <div class="cert-info">
+                            <div class="cert-name">Sales Management</div>
+                            <div class="cert-company">HubSpot Academy</div>
+                        </div>
+                    </div>
+                    <div class="cert-item" onclick="openCertModal('Friction Sales Certificate hubspot Academy.png', '#')">
+                        <img src="Friction Sales Certificate hubspot Academy.png" alt="Frictionless Sales" class="cert-image">
+                        <div class="cert-info">
+                            <div class="cert-name">Frictionless Sales</div>
+                            <div class="cert-company">HubSpot Academy</div>
+                        </div>
+                    </div>
+                    <div class="cert-item" onclick="openCertModal('Inbound Sales Certificate.png', '#')">
+                        <img src="Inbound Sales Certificate.png" alt="Inbound Sales" class="cert-image">
+                        <div class="cert-info">
+                            <div class="cert-name">Inbound Sales</div>
+                            <div class="cert-company">HubSpot Academy</div>
+                        </div>
+                    </div>
+                    <div class="cert-item" onclick="openCertModal('Use Canva to Design Digital Course Collateral.png', '#')">
+                        <img src="Use Canva to Design Digital Course Collateral.png" alt="Canva Course Design" class="cert-image">
+                        <div class="cert-info">
+                            <div class="cert-name">Use Canva to Design Digital Course Collateral</div>
+                            <div class="cert-company">Coursera Project Network</div>
+                        </div>
+                    </div>
+                    <div class="cert-item" onclick="openCertModal('Creating social media content using prezi.png', '#')">
+                        <img src="Creating social media content using prezi.png" alt="Social Media Content with Prezi" class="cert-image">
+                        <div class="cert-info">
+                            <div class="cert-name">Creating Social Media Content Using Prezi</div>
+                            <div class="cert-company">Coursera Project Network</div>
+                        </div>
+                    </div>
+                    <div class="cert-item" onclick="openCertModal('Technical Support Fundamentals Certificate.png', '#')">
+                        <img src="Technical Support Fundamentals Certificate.png" alt="Technical Support Fundamentals" class="cert-image">
+                        <div class="cert-info">
+                            <div class="cert-name">Technical Support Fundamentals</div>
+                            <div class="cert-company">Google via Coursera</div>
+                        </div>
+                    </div>
+                    <div class="cert-item" onclick="openCertModal('Foundations of UX design.png', '#')">
+                        <img src="Foundations of UX design.png" alt="Foundations of UX Design" class="cert-image">
+                        <div class="cert-info">
+                            <div class="cert-name">Foundations of UX Design</div>
+                            <div class="cert-company">Google via Coursera</div>
+                        </div>
+                    </div>
+                    <div class="cert-item" onclick="openCertModal('Small Business Marketing using  youtube.png', '#')">
+                        <img src="Small Business Marketing using  youtube.png" alt="Small Business Marketing YouTube" class="cert-image">
+                        <div class="cert-info">
+                            <div class="cert-name">Small Business Marketing Using YouTube</div>
+                            <div class="cert-company">Coursera Project Network</div>
+                        </div>
+                    </div>
+                    <div class="cert-item" onclick="openCertModal('Foundations of cybersecurity.png', '#')">
+                        <img src="Foundations of cybersecurity.png" alt="Foundations of Cybersecurity" class="cert-image">
+                        <div class="cert-info">
+                            <div class="cert-name">Foundations of Cybersecurity</div>
+                            <div class="cert-company">Google via Coursera</div>
+                        </div>
+                    </div>
+                    <div class="cert-item" onclick="openCertModal('Project Management.png', '#')">
+                        <img src="Project Management.png" alt="Project Management" class="cert-image">
+                        <div class="cert-info">
+                            <div class="cert-name">Project Management</div>
+                            <div class="cert-company">Google via Coursera</div>
+                        </div>
+                    </div>
+                    <div class="cert-item" onclick="openCertModal('Bits and Bytes of computer networking.png', '#')">
+                        <img src="Bits and Bytes of computer networking.png" alt="Computer Networking" class="cert-image">
+                        <div class="cert-info">
+                            <div class="cert-name">Bits and Bytes of Computer Networking</div>
+                            <div class="cert-company">Google via Coursera</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-column">
+            <div class="sidebar-card">
+                <div class="sidebar-title">People Also Viewed</div>
+                <div class="sidebar-item">Sales Manager at Tech Corp</div>
+                <div class="sidebar-item">Business Development Lead</div>
+                <div class="sidebar-item">Account Executive at Growth Inc</div>
+                <div class="sidebar-item">Sales Director at Enterprise Co</div>
+            </div>
+            
+            <div class="sidebar-card">
+                <div class="sidebar-title">People You May Know</div>
+                <div class="sidebar-item">Marketing Specialist</div>
+                <div class="sidebar-item">Lead Generation Expert</div>
+                <div class="sidebar-item">Sales Consultant</div>
+            </div>
+
+            <div class="sidebar-card">
+                <div class="sidebar-title">LinkedIn News</div>
+                <div class="sidebar-item">Top Sales Strategies for 2025</div>
+                <div class="sidebar-item">Remote Work Trends</div>
+                <div class="sidebar-item">AI in Sales & Marketing</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Message Modal -->
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>Send a Message</span>
+                <span class="close-btn" onclick="closeMessageModal()" style="position: static; width: 24px; height: 24px; font-size: 24px; border: none; top: auto; right: auto;">×</span>
+            </div>
+            <div id="successMessage" style="display: none;" class="success-message">
+                Message sent successfully!
+            </div>
+            <form id="messageForm" action="https://formspree.io/f/mnjpppod" method="POST">
+                <div class="form-group">
+                    <label class="form-label" for="senderName">Your Name</label>
+                    <input type="text" name="name" id="senderName" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="senderEmail">Your Email</label>
+                    <input type="email" name="email" id="senderEmail" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="messageSubject">Subject</label>
+                    <input type="text" name="subject" id="messageSubject" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="messageContent">Message</label>
+                    <textarea name="message" id="messageContent" class="form-textarea" required></textarea>
+                </div>
+                <button type="submit" class="form-submit" id="submitBtn">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Certificate Modal -->
+    <div id="certModal" class="modal">
+        <div class="cert-modal-content">
+            <span class="close-btn" onclick="closeCertModal()">×</span>
+            <img id="certModalImage" src="" alt="Certificate" class="cert-modal-image">
+            <a id="certVerifyLink" href="#" target="_blank" class="btn btn-primary" style="margin-top: 20px; text-decoration: none; display: inline-block;"></a>
+        </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>Contact Information</span>
+                <span class="close-btn" onclick="closeContactModal()" style="position: static; width: 24px; height: 24px; font-size: 24px; border: none; top: auto; right: auto;">×</span>
+            </div>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-label">Phone</div>
+                    <div class="contact-value">+974 7764-2002</div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-label">Email</div>
+                    <div class="contact-value"><a href="mailto:b.ltd.987@gmail.com">b.ltd.987@gmail.com</a></div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-label">Location</div>
+                    <div class="contact-value">Ar Rayyān, Baladīyat ar Rayyān, Qatar</div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-label">Website</div>
+                    <div class="contact-value"><a href="https://labeeb987.github.io/portfolio" target="_blank">labeeb987.github.io/portfolio</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function openMessageModal() {
+            document.getElementById('messageModal').classList.add('active');
+        }
+
+        function closeMessageModal() {
+            document.getElementById('messageModal').classList.remove('active');
+            document.getElementById('messageForm').reset();
+            document.getElementById('successMessage').style.display = 'none';
+        }
+
+        function sendMessage(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('senderName').value;
+            const email = document.getElementById('senderEmail').value;
+            const subject = document.getElementById('messageSubject').value;
+            const message = document.getElementById('messageContent').value;
+            
+            const mailtoLink = `mailto:b.ltd.987@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent('From: ' + name + '\nEmail: ' + email + '\n\n' + message)}`;
+            
+            window.location.href = mailtoLink;
+            
+            document.getElementById('successMessage').style.display = 'block';
+            document.getElementById('messageForm').reset();
+            
+            setTimeout(() => {
+                closeMessageModal();
+            }, 2000);
+        }
+
+        function openCertModal(imageSrc, verifyLink) {
+            document.getElementById('certModalImage').src = imageSrc;
+            document.getElementById('certVerifyLink').href = verifyLink;
+            document.getElementById('certModal').classList.add('active');
+        }
+
+        function closeCertModal() {
+            document.getElementById('certModal').classList.remove('active');
+        }
+
+        function openContactModal() {
+            document.getElementById('contactModal').classList.add('active');
+        }
+
+        function closeContactModal() {
+            document.getElementById('contactModal').classList.remove('active');
+        }
+
+        function openNetworkModal() {
+            alert('Network feature - Connect with professionals in your industry');
+        }
+
+        function openJobsModal() {
+            alert('Jobs feature - Explore career opportunities');
+        }
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            const messageModal = document.getElementById('messageModal');
+            const certModal = document.getElementById('certModal');
+            const contactModal = document.getElementById('contactModal');
+            
+            if (event.target === messageModal) {
+                closeMessageModal();
+            }
+            if (event.target === certModal) {
+                closeCertModal();
+            }
+            if (event.target === contactModal) {
+                closeContactModal();
+            }
+        }
+    </script>
+</body>
+</html>
